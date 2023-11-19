@@ -1,0 +1,28 @@
+.textField {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  & > label {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 20px;
+  }
+  & > input {
+    height: 40px;
+    border-radius: 6px;
+    color: #686767;
+    font-family: Montserrat;
+    font-size: 18px;
+    padding-left: 10px;
+    border: 1px solid #D0D0D0;
+    outline: none;
+    &:focus{
+        border-color: #916BBF;
+        color: #916BBF;
+    }
+    &::placeholder{
+        color: #c9c6c6;
+    }
+  }
+}
