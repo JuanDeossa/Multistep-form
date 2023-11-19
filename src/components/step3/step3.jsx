@@ -5,16 +5,19 @@ import { BackButton } from "../backButton/backButton";
 import { SubmitButton } from "../submitButton/submitButton";
 
 export const Step3 = ({
+  formInstance,
   classes,
-  register,
   setCurrentStep,
-  errors,
-  isValid,
-  watch,
-  trigger,
   validStep,
   setValidStep,
 }) => {
+  const {
+    register,
+    trigger,
+    watch,
+    formState: { errors, isValid },
+  } = formInstance;
+
   const { phone, address } = watch();
 
   const validate = async () => {

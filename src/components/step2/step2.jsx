@@ -5,16 +5,21 @@ import { BackButton } from "../backButton/backButton";
 import { NextButton } from "../nextButton/nextButton";
 
 export const Step2 = ({
+  formInstance,
   classes,
-  register,
   currentStep,
   setCurrentStep,
   validStep,
   setValidStep,
-  watch,
-  trigger,
-  errors,
 }) => {
+
+  const {
+    register,
+    trigger,
+    watch,
+    formState: { errors },
+  } = formInstance;
+
   const { email, password } = watch();
 
   const validate = async () => {

@@ -5,15 +5,19 @@ import { NextButton } from "../nextButton/nextButton";
 
 export const Step1 = ({
   classes,
-  register,
-  errors,
-  trigger,
+  formInstance,
   setCurrentStep,
-  watch,
   currentStep,
   validStep,
   setValidStep,
 }) => {
+  const {
+    register,
+    trigger,
+    watch,
+    formState: { errors },
+  } = formInstance;
+
   const { name, lastName } = watch();
 
   const validate = async () => {
