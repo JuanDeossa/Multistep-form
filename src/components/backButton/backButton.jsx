@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { IconArrowLeft } from "@tabler/icons-react";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export const BackButton = ({ disabled = true }) => {
   const { setCurrentStep } = useSignUpFormContext();
@@ -11,7 +11,7 @@ export const BackButton = ({ disabled = true }) => {
       onClick={() => setCurrentStep((prev) => prev - 1)}
       disabled={disabled}
     >
-      <IconArrowLeft />
+      <ArrowLeftIcon  width={20} height={20}/>
     </button>
   );
 };

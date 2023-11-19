@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { IconCheck } from "@tabler/icons-react";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 const stepsArr = [
   {
@@ -29,7 +29,11 @@ export const StepIndicator = ({ steps = stepsArr, currentStepFF = null }) => {
             currentStep !== id && "opacity-60"
           }`}
         >
-          {currentStep > id ? <IconCheck /> : label}
+          {currentStep > id ? (
+            <CheckIcon width={20} height={20} strokeWidth={5} />
+          ) : (
+            label
+          )}
         </span>
       ))}
     </div>

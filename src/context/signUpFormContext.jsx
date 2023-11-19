@@ -21,7 +21,7 @@ const defaultValues = {
 export const SignUpFormContext = createContext(null);
 
 export const SignUpFormContextProvider = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
   const [validStep1, setValidStep1] = useState(null);
   const [validStep2, setValidStep2] = useState(null);
   const [validStep3, setValidStep3] = useState(null);

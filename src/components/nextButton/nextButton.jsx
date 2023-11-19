@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { IconArrowRight } from "@tabler/icons-react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 
 export const NextButton = ({ disabled = true }) => {
@@ -11,7 +11,7 @@ export const NextButton = ({ disabled = true }) => {
       onClick={() => setCurrentStep((prev) => prev + 1)}
       disabled={disabled}
     >
-      <IconArrowRight />
+      <ArrowRightIcon width={20} height={20} />
     </button>
   );
 };

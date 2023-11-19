@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BackButton } from "../backButton/backButton";
 import { NextButton } from "../nextButton/nextButton";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 import { PasswordValidationsAlert } from "../passwordValidationsAlert/passwordValidationsAlert";
 
-export const Step2 = ({
-  classes,
-  // formInstance,
-  // currentStep,
-  // setCurrentStep,
-  // validStep,
-  // setValidStep,
-}) => {
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+
+export const Step2 = ({ classes }) => {
+  const [showPasswordValidations, setShowPasswordValidations] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const {
     formInstance,
@@ -67,18 +66,39 @@ export const Step2 = ({
       </div>
       <div className={classes.textField}>
         <label>Password</label>
-        <input
-          type="text"
-          placeholder="******"
-          {...register("password", {
-            required: {
-              value: true,
-              message: "password required",
-            },
-          })}
-        />
+        <div className="w-full relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="******"
+            onFocus={() => setShowPasswordValidations(true)}
+            className="w-full "
+            {...register("password", {
+              required: {
+                value: true,
+                message: "password required",
+              },
+            })}
+          />
+          <span className="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer">
+            {showPassword ? (
+              <EyeIcon
+                width={20}
+                height={20}
+                color="#686767"
+                onClick={handlePasswordVisibility}
+              />
+            ) : (
+              <EyeSlashIcon
+                width={20}
+                height={20}
+                color="#686767"
+                onClick={handlePasswordVisibility}
+              />
+            )}
+          </span>
+        </div>
         <span className={classes.alertField}>{errors.password?.message}</span>
-        <PasswordValidationsAlert/>
+        {showPasswordValidations && <PasswordValidationsAlert />}
       </div>
       <div className="flex gap-4">
         <BackButton disabled={false} />
