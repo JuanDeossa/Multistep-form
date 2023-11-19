@@ -2,15 +2,16 @@
 
 import { useEffect } from "react";
 import { NextButton } from "../nextButton/nextButton";
+import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 
-export const Step1 = ({
-  classes,
-  formInstance,
-  setCurrentStep,
-  currentStep,
-  validStep,
-  setValidStep,
-}) => {
+export const Step1 = ({ classes }) => {
+  const {
+    formInstance,
+    currentStep,
+    validStep1: validStep,
+    setValidStep1: setValidStep,
+  } = useSignUpFormContext();
+
   const {
     register,
     trigger,
@@ -80,7 +81,7 @@ export const Step1 = ({
         />
         <span className={classes.alertField}>{errors.lastName?.message}</span>
       </div>
-      <NextButton setCurrentStep={setCurrentStep} disabled={!validStep} />
+      <NextButton disabled={!validStep} />
     </div>
   );
 };

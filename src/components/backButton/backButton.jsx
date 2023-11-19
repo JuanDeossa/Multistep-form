@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { IconArrowLeft } from "@tabler/icons-react";
+import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 
-export const BackButton = ({ setCurrentStep, disabled = true }) => {
+export const BackButton = ({ disabled = true }) => {
+  const { setCurrentStep } = useSignUpFormContext();
   return (
     <button
       type="button"

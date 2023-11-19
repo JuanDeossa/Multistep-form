@@ -18,7 +18,7 @@ const defaultValues = {
   // address: "Cra52A#99Sur-90",
 };
 
-export const signUpFormContext = createContext(null);
+export const SignUpFormContext = createContext(null);
 
 export const SignUpFormContextProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -28,7 +28,7 @@ export const SignUpFormContextProvider = ({ children }) => {
   const formInstance = useForm({ defaultValues });
 
   return (
-    <SignUpFormContextProvider.Provider
+    <SignUpFormContext.Provider
       value={{
         formInstance,
         currentStep,
@@ -42,6 +42,6 @@ export const SignUpFormContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </SignUpFormContextProvider.Provider>
+    </SignUpFormContext.Provider>
   );
 };

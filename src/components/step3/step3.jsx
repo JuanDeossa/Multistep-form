@@ -3,14 +3,21 @@
 import { useEffect } from "react";
 import { BackButton } from "../backButton/backButton";
 import { SubmitButton } from "../submitButton/submitButton";
+import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 
 export const Step3 = ({
-  formInstance,
   classes,
-  setCurrentStep,
-  validStep,
-  setValidStep,
+  // formInstance,
+  // setCurrentStep,
+  // validStep,
+  // setValidStep,
 }) => {
+  const {
+    formInstance,
+    validStep3: validStep,
+    setValidStep3: setValidStep,
+  } = useSignUpFormContext();
+
   const {
     register,
     trigger,
@@ -67,7 +74,7 @@ export const Step3 = ({
         <span className={classes.alertField}>{errors.address?.message}</span>
       </div>
       <div className="flex gap-4">
-        <BackButton setCurrentStep={setCurrentStep} disabled={false} />
+        <BackButton disabled={false} />
         <SubmitButton disabled={!isValid} />
       </div>
     </div>

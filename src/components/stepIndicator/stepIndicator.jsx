@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { IconCheck } from "@tabler/icons-react";
+import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 const stepsArr = [
   {
     id: 1,
@@ -15,7 +16,10 @@ const stepsArr = [
   },
 ];
 
-export const StepIndicator = ({ steps = stepsArr, currentStep }) => {
+export const StepIndicator = ({ steps = stepsArr, currentStepFF = null }) => {
+  const { currentStep: currentStepFC } = useSignUpFormContext();
+  const currentStep = currentStepFF || currentStepFC;
+  // console.log("currentStep: ",currentStep);
   return (
     <div className="StepIndicator w-full flex gap-3 justify-center">
       {steps.map(({ id, label }) => (
@@ -25,7 +29,7 @@ export const StepIndicator = ({ steps = stepsArr, currentStep }) => {
             currentStep !== id && "opacity-60"
           }`}
         >
-          {currentStep > id ? <IconCheck/> : label}
+          {currentStep > id ? <IconCheck /> : label}
         </span>
       ))}
     </div>

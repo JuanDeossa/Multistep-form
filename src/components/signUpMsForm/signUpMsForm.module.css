@@ -26,11 +26,11 @@
     }
   }
 }
-.dev  svg {
+.dev svg {
   width: 50px;
   height: 50px !important;
 }
-.alertField{
+.alertField {
   color: indianred;
-  font-weight:600;
+  font-weight: 600;
 }

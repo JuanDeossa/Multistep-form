@@ -3,15 +3,24 @@
 import { useEffect } from "react";
 import { BackButton } from "../backButton/backButton";
 import { NextButton } from "../nextButton/nextButton";
+import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
+import { PasswordValidationsAlert } from "../passwordValidationsAlert/passwordValidationsAlert";
 
 export const Step2 = ({
-  formInstance,
   classes,
-  currentStep,
-  setCurrentStep,
-  validStep,
-  setValidStep,
+  // formInstance,
+  // currentStep,
+  // setCurrentStep,
+  // validStep,
+  // setValidStep,
 }) => {
+
+  const {
+    formInstance,
+    currentStep,
+    validStep2: validStep,
+    setValidStep2: setValidStep,
+  } = useSignUpFormContext();
 
   const {
     register,
@@ -69,10 +78,11 @@ export const Step2 = ({
           })}
         />
         <span className={classes.alertField}>{errors.password?.message}</span>
+        <PasswordValidationsAlert/>
       </div>
       <div className="flex gap-4">
-        <BackButton setCurrentStep={setCurrentStep} disabled={false} />
-        <NextButton setCurrentStep={setCurrentStep} disabled={!validStep} />
+        <BackButton disabled={false} />
+        <NextButton disabled={!validStep} />
       </div>
     </div>
   );
