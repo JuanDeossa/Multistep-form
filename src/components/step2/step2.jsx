@@ -1,16 +1,53 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BackButton } from "../backButton/backButton";
 import { NextButton } from "../nextButton/nextButton";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 import { PasswordValidationsAlert } from "../passwordValidationsAlert/passwordValidationsAlert";
-
+import { CSSTransition } from "react-transition-group";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import "./step2.css";
 
-export const Step2 = ({ classes }) => {
+const INITIAL_VALIDATIONS = [
+  {
+    id: "upper",
+    regex: /[A-Z]/,
+    message: "At least 1 upper character A-Z",
+    valid: false,
+  },
+  {
+    id: "lower",
+    regex: /[a-z]/,
+    message: "At least 1 lower character a-z",
+    valid: false,
+  },
+  {
+    id: "number",
+    regex: /[0-9]/,
+    message: "At least 1 number 0-9",
+    valid: false,
+  },
+  {
+    id: "minLength",
+    regex: /^.{6,}$/,
+    message: "6 characters min",
+    valid: false,
+  },
+  {
+    id: "special",
+    regex: /[!@#%^&*_]/,
+    message: "At least 1 special character",
+    valid: false,
+  },
+];
+
+export const Step2 = () => {
+  const nodeRef = useRef(null);
+
   const [showPasswordValidations, setShowPasswordValidations] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [validations, setValidations] = useState(INITIAL_VALIDATIONS);
 
   const handlePasswordVisibility = () => setShowPassword((prev) => !prev);
 
@@ -19,6 +56,7 @@ export const Step2 = ({ classes }) => {
     currentStep,
     validStep2: validStep,
     setValidStep2: setValidStep,
+    classes,
   } = useSignUpFormContext();
 
   const {
@@ -30,6 +68,14 @@ export const Step2 = ({ classes }) => {
 
   const { email, password } = watch();
 
+  const handlePasswordValidation = () => {
+    setValidations([
+      ...validations.map((validation) => ({
+        ...validation,
+        valid: validation.regex.test(password),
+      })),
+    ]);
+  };
   const validate = async () => {
     if (validStep !== null) {
       const isValid = (await trigger("email")) && (await trigger("password"));
@@ -37,6 +83,7 @@ export const Step2 = ({ classes }) => {
     } else {
       setValidStep(false);
     }
+    handlePasswordValidation();
   };
 
   useEffect(() => {
@@ -45,7 +92,7 @@ export const Step2 = ({ classes }) => {
   }, [email, password, currentStep]);
 
   return (
-    <div className="Step2">
+    <div className="Step2 flex flex-col flex-grow">
       <div className={classes.textField}>
         <label>Email</label>
         <input
@@ -69,7 +116,7 @@ export const Step2 = ({ classes }) => {
         <div className="w-full relative">
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="******"
+            placeholder={showPassword ? "" : "*******"}
             onFocus={() => setShowPasswordValidations(true)}
             className="w-full "
             {...register("password", {
@@ -78,6 +125,7 @@ export const Step2 = ({ classes }) => {
                 message: "password required",
               },
             })}
+            // onChange={handlePasswordValidation}
           />
           <span className="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer">
             {showPassword ? (
@@ -98,11 +146,23 @@ export const Step2 = ({ classes }) => {
           </span>
         </div>
         <span className={classes.alertField}>{errors.password?.message}</span>
-        {showPasswordValidations && <PasswordValidationsAlert />}
       </div>
-      <div className="flex gap-4">
+      <CSSTransition
+        in={showPasswordValidations}
+        nodeRef={nodeRef}
+        timeout={5000}
+        classNames="alert"
+        unmountOnExit
+      >
+        <div ref={nodeRef} className="mt-2">
+          <PasswordValidationsAlert validations={validations} />
+        </div>
+      </CSSTransition>
+      <div className="flex gap-4 items-end flex-grow">
         <BackButton disabled={false} />
-        <NextButton disabled={!validStep} />
+        <NextButton
+          disabled={!validStep || !validations.every((val) => !!val.valid)}
+        />
       </div>
     </div>
   );

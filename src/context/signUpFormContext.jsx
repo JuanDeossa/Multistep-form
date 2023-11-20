@@ -2,13 +2,15 @@
 // MyContext.js
 import { createContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import classes from './signUpFormContext.module.css'
+
 
 const defaultValues = {
-  name: "Ass",
-  lastName: "A",
-  email: "Juan@gmail.com",
+  name: "",
+  lastName: "",
+  email: "",
   password: "",
-  phone: "321",
+  phone: "",
   address: "",
   // name: "Juan",
   // lastName: "Deossa",
@@ -21,7 +23,7 @@ const defaultValues = {
 export const SignUpFormContext = createContext(null);
 
 export const SignUpFormContextProvider = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
   const [validStep1, setValidStep1] = useState(null);
   const [validStep2, setValidStep2] = useState(null);
   const [validStep3, setValidStep3] = useState(null);
@@ -30,6 +32,7 @@ export const SignUpFormContextProvider = ({ children }) => {
   return (
     <SignUpFormContext.Provider
       value={{
+        classes,
         formInstance,
         currentStep,
         validStep1,

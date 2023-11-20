@@ -8,7 +8,7 @@ const MESSAGE =
 export const useSignUpFormContext = () => {
   const context = useContext(SignUpFormContext);
   if (!context) {
-    alert(MESSAGE);
+    // alert(MESSAGE);
     throw new Error(MESSAGE);
   }
   return context;

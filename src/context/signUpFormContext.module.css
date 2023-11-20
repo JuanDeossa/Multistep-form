@@ -2,13 +2,13 @@
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 1px;
   & > label {
     color: #000;
     font-family: Montserrat;
     font-size: 20px;
   }
-  &  input {
+  & input {
     height: 40px;
     border-radius: 6px;
     color: #686767;
@@ -25,12 +25,17 @@
       color: #918f8f;
     }
   }
+  & input[type="number"]::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 }
 .dev svg {
-  width: 50px;
-  height: 50px !important;
+  width: 30px;
+  height: 30px !important;
 }
 .alertField {
   color: indianred;
   font-weight: 600;
+  font-size: 14px;
 }

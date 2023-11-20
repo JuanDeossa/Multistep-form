@@ -4,12 +4,13 @@ import { useEffect } from "react";
 import { NextButton } from "../nextButton/nextButton";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 
-export const Step1 = ({ classes }) => {
+export const Step1 = () => {
   const {
     formInstance,
     currentStep,
     validStep1: validStep,
     setValidStep1: setValidStep,
+    classes,
   } = useSignUpFormContext();
 
   const {
@@ -36,7 +37,7 @@ export const Step1 = ({ classes }) => {
   }, [name, lastName, currentStep]);
 
   return (
-    <div className="Step1">
+    <div className="Step1 flex flex-col gap-6 mt-6 flex-grow">
       <div className={classes.textField}>
         <label>Name</label>
         <input
@@ -81,7 +82,9 @@ export const Step1 = ({ classes }) => {
         />
         <span className={classes.alertField}>{errors.lastName?.message}</span>
       </div>
-      <NextButton disabled={!validStep} />
+      <div className="flex-grow flex items-end">
+        <NextButton disabled={!validStep} />
+      </div>
     </div>
   );
 };

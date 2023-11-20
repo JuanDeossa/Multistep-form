@@ -5,17 +5,12 @@ import { BackButton } from "../backButton/backButton";
 import { SubmitButton } from "../submitButton/submitButton";
 import { useSignUpFormContext } from "../../hooks/useSignUpFormContext";
 
-export const Step3 = ({
-  classes,
-  // formInstance,
-  // setCurrentStep,
-  // validStep,
-  // setValidStep,
-}) => {
+export const Step3 = () => {
   const {
     formInstance,
     validStep3: validStep,
     setValidStep3: setValidStep,
+    classes,
   } = useSignUpFormContext();
 
   const {
@@ -42,7 +37,7 @@ export const Step3 = ({
   }, [phone, address]);
 
   return (
-    <div className="Step3">
+    <div className="Step3 flex flex-col gap-2 mt-6 flex-grow">
       <div className={classes.textField}>
         <label>Phone Number</label>
         <input
@@ -56,8 +51,8 @@ export const Step3 = ({
             },
           })}
         />
+        <span className={classes.alertField}>{errors.phone?.message}</span>
       </div>
-      <span className={classes.alertField}>{errors.phone?.message}</span>
       <div className={classes.textField}>
         <label>Address</label>
         <input
@@ -73,7 +68,7 @@ export const Step3 = ({
         />
         <span className={classes.alertField}>{errors.address?.message}</span>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-end flex-grow">
         <BackButton disabled={false} />
         <SubmitButton disabled={!isValid} />
       </div>
