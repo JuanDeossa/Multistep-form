@@ -19,7 +19,7 @@ export const SignUpMsForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="SignUpMsForm bg-gray-50 p-6 min-h-[50vh] min-w-[400px] rounded-md shadow-sm shadow-slate-200 flex flex-col gap-2 items-center"
+      className="SignUpMsForm bg-gray-50 p-6 min-h-[50vh] min-w-[300px] rounded-md shadow-sm shadow-slate-200 flex flex-col gap-2 items-center"
     >
       <StepIndicator />
       {currentStep === 1 && <Step1 />}
